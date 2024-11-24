@@ -1,4 +1,4 @@
-# EX-10:OPENING--AND-CLOSING
+# OPENING--AND-CLOSING
 ## Aim
 To implement Opening and Closing using Python and OpenCV.
 
@@ -6,79 +6,89 @@ To implement Opening and Closing using Python and OpenCV.
 1. Anaconda - Python 3.7
 2. OpenCV
 ## Algorithm:
-### Step-1:Read the Image:
+### Step1:
+Import the necessary packages
 
-Load the input color image from a specified path.
-### Step-2:Convert to Grayscale:
+### Step2:
+Create the Text using cv2.putText
+### Step3:
+Create the structuring element
 
-Transform the color image into a grayscale format for easier processing.
-### Step-3:Edge Detection:
+### Step4:
+Use Opening operation
 
-Apply an edge detection technique to identify the prominent edges in the grayscale image.
-### Step-4:Create Structuring Element:
+### Step5:
+Use Closing Operation
 
-Define a kernel (structuring element) for use in morphological operations, typically a matrix of ones.
-### Step-6:Morphological Operations:
 
-Perform morphological operations:<br>
-Opening: Remove small objects from the edges to clean up the image.<br>
-Closing: Fill small holes in the detected edges to enhance the structure.
-### Step-7:Display Results:
-
-Show the original grayscale image, along with the results of the opening and closing operations for visual comparison.
 
  
 ## Program:
 ```
-Developed By : VAISHNAV NANDA
-Reference Number: 212222240112
+Name : JAVITH M 
+Register no :212222110014
 ```
-# Import the necessary packages
-```
-import cv2
+
+#### Import the necessary packages
+
+``` Python
 import numpy as np
-from matplotlib import pyplot as plt
-```
-# Create the Text using cv2.putText
-```
-input_image_path = 'cart.jpg'
-color_image = cv2.imread(input_image_path)
-gray_image = cv2.cvtColor(color_image, cv2.COLOR_BGR2GRAY)
-plt.imshow(gray_image,cmap="gray")
-edges = cv2.Canny(gray_image, 100, 200)
-kernel_size = 5
-kernel = np.ones((kernel_size, kernel_size), np.uint8)
-erosion = cv2.erode(edges, kernel, iterations=1)
-dilation = cv2.dilate(edges, kernel, iterations=1)
+import cv2
+import matplotlib.pyplot as plt
 ```
 
-# Create the structuring element
-```
-plt.figure(figsize=(15, 10))
-plt.subplot(2,2,1)
-plt.imshow(gray_image)
-plt.title('Original Color Image')
-plt.axis('off')
-```
-![alt text](image-1.png)
-# Use Opening operation
-```
-opening = cv2.morphologyEx(edges, cv2.MORPH_OPEN, kernel)
-plt.imshow(opening, cmap='gray')
-plt.title('Opening')
-plt.axis('off')
-```
-![alt text](image-2.png)
+#### Read and show the Original image
 
-# Use Closing Operation
+``` Python
+image = cv2.imread("fingerprint.png")
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+plt.imshow(image_rgb)
+plt.title("Original Image")
+plt.axis("off")
 ```
-closing = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel)
-plt.imshow(closing, cmap='gray')
-plt.title('Closing')
-plt.axis('off')
-plt.show()
+
+
+
+#### Use Opening operation
+
 ```
-![alt text](image-3.png)
+opening_image = cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
+opening_image_rgb = cv2.cvtColor(opening_image, cv2.COLOR_BGR2RGB)
+plt.imshow(opening_image_rgb)
+plt.title("Opening Operation")
+plt.axis("off")
+```
+
+
+#### Use Closing Operation
+
+```
+closing_image = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
+closing_image_rgb = cv2.cvtColor(closing_image, cv2.COLOR_BGR2RGB)
+plt.imshow(closing_image_rgb)
+plt.title("Closing Operation")
+plt.axis("off")
+
+
+```
+## Output:
+
+### Display the Original Image
+
+![Screenshot 2024-11-24 150358](https://github.com/user-attachments/assets/ec26878f-dc68-4f16-a314-03aa8e2fb797)
+
+
+
+### Display the result of Opening
+
+![Screenshot 2024-11-24 150405](https://github.com/user-attachments/assets/6ef68aee-f32f-492c-91f7-720a37bb2808)
+
+### Display the result of Closing
+
+![Screenshot 2024-11-24 150418](https://github.com/user-attachments/assets/18c9126b-a660-4be7-be5b-1661e5fe44fa)
+
+
 
 ## Result
 Thus the Opening and Closing operation is used in the image using python and OpenCV.
